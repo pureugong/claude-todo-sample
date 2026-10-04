@@ -127,7 +127,9 @@
 
   function render() {
     list.innerHTML = '';
-    for (const todo of todos) {
+    // 완료한 일은 아래로. 저장 순서는 그대로 두어 체크를 풀면 원래 자리로 돌아간다.
+    const ordered = [...todos.filter(t => !t.done), ...todos.filter(t => t.done)];
+    for (const todo of ordered) {
       const li = document.createElement('li');
       li.dataset.id = todo.id;
       if (todo.done) li.className = 'done';
